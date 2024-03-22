@@ -57,6 +57,7 @@ class WORKERHANLDE(object):
                     workerJobList[worker] = rollout
                     job_description = [self.job_task, str(worker+1), str(rollout), str(self.sim_length), str(blackout), str(self.optimize_selector), str(self.behaviour_selector)]
                     devnull = open(os.devnull, 'w')
+                    print(job_description)
                     self.worker_pool[worker] = subprocess.Popen(job_description, bufsize=0)#, stdout=devnull)
                     rollout = rollout+1
                     print(str(rollout) + " ", end="", flush=True)

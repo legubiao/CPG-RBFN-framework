@@ -149,5 +149,5 @@ echo "*** CONTROLLER OUTPUT ***"
 
 #echo $behaviour
 #echo $policy_selector
-#echo "./../interfaces/morf/sim/build_dir/bin/morf_controller $simID $rollout $simtime $blackout $policy_selector $behaviour"
+echo "./../interfaces/morf/sim/build_dir/bin/morf_controller $simID $rollout $simtime $blackout $policy_selector $behaviour"
 ./../interfaces/morf/sim/build_dir/bin/morf_controller $simID $rollout_selector $simtime $blackout $policy_selector $behaviour

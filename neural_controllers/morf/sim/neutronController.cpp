@@ -11,6 +11,7 @@ neutronController::neutronController(int argc,char* argv[]) {
     // initialize random seed
     srand (time(NULL));
 
+    // 获取输入的参数，比如 1 0 6 0 1 walk
     // Controller input
     simulationID        = std::stoi(argv[1]);
     rollout             = std::stoi(argv[2]);
@@ -126,6 +127,7 @@ neutronController::neutronController(int argc,char* argv[]) {
 
     if(simulation) {
         // Start the environment
+        cout << "start simulation in neutronController.cpp" << endl;
         env->start();
         // Use black screen if true
         env->blackoutSimulation(blackOut);

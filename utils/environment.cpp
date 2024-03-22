@@ -107,7 +107,8 @@ void environment::pause() {
 }
 
 void environment::start() {
-    simxStartSimulation(clientID, simx_opmode_oneshot);
+    simxInt result = simxStartSimulation(clientID, simx_opmode_oneshot);
+    cout << result << endl;
 }
 
 void environment::restart() {

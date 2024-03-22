@@ -2382,6 +2382,7 @@ EXTAPI_DLLEXPORT simxInt simxReadProximitySensor(simxInt clientID,simxInt sensor
 EXTAPI_DLLEXPORT simxInt simxStartSimulation(simxInt clientID,simxInt operationMode)
 {
     simxInt returnValue;
+    printf("start simulation in extApi.cpp");
     if (_communicationThreadRunning[clientID]==0)
         return(simx_return_initialize_error_flag);
     if (operationMode==simx_opmode_remove)
