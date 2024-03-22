@@ -51,11 +51,8 @@ git clone https://github.com/MathiasThor/CPG-RBFN-framework.git
 3. Extract the downloaded .zip file into a directory as many times as you need "simulation workers" _(i.e., the number of simulations running in parallel. We used four workers in all our experiments)_.
 4. Rename the extracted coppeliaSim directories as: `VREP1`, `VREP2`, `VREP3`, `VREP4`, etc. _(optional: set `$VREP_WORKER_PATH` to the path for the directory containing the workers)_.
 5. In `remoteApiConnections.txt` in each of the `VREP#` directories, change `portIndex1_port` so that `VREP1` has `19997`, `VREP2` has `19996`, `VREP3` has `19995`, `VREP4` has `19994`, etc.
-6. Copy `libv_repExtRosInterface.so` into each of the worker directories from the utils directory.
-```bash
-cp $FRAMEWORK_PATH/CPG-RBFN-framework/utils/libv_repExtRosInterface.so $VREP_WORKER_PATH/VREP1/
-```
-7. Install the required python libraries _(matplotlib, jupyter, drawnow, and numpy)_.
+
+6. Install the required python libraries _(matplotlib, jupyter, drawnow, and numpy)_.
 ```bash
 cd $FRAMEWORK_PATH/CPG-RBFN-framework/
 ```
@@ -119,25 +116,25 @@ roscore
 cd $VREP_WORKER_PATH/VREP1/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
+./coppeliaSim.sh -GROSInterface.nodeName=ros_interface_1 $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt 
 ```
 ```bash
 cd $VREP_WORKER_PATH/VREP2/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
+./coppeliaSim.sh -GROSInterface.nodeName=ros_interface_2 $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
 ```
 ```bash
 cd $VREP_WORKER_PATH/VREP3/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
+./coppeliaSim.sh -GROSInterface.nodeName=ros_interface_3 $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
 ```
 ```bash
 cd $VREP_WORKER_PATH/VREP4/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
+./coppeliaSim.sh -GROSInterface.nodeName=ros_interface_4 $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/MORF_base_behavior.ttt
 ```
 3. Build the locomotion controller.
 ```bash

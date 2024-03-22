@@ -344,25 +344,8 @@ if (sim_call_type==sim.childscriptcall_initialization) then
         old_theta = walking_direction
     end
 
-    -- Check if the required ROS plugin is loaded
-    moduleName=0
-    moduleVersion=0
-    index=0
-    pluginNotFound=true
-    while moduleName do
-        moduleName,moduleVersion=sim.getModuleName(index)
-        if (moduleName=='RosInterface') then
-            pluginNotFound=false
-        end
-        index=index+1
-    end
-    if (pluginNotFound) then
-        sim.displayDialog('Error','The RosInterface was not found.',sim.dlgstyle_ok,false,nil,{0.8,0,0,0,0,0},{0.5,0,0,1,1,1})
-        printToConsole('[ERROR] The RosInterface was not found.')
-    end
-
     -- If found then start the subscribers and publishers
-    if (not pluginNotFound) then
+    if simROS then
         -- Create the subscribers
         MotorSub=simROS.subscribe('/'..'morf_sim'..simulationID..'/multi_joint_command','std_msgs/Float32MultiArray','setMotorPositions_cb')
         GraphSub=simROS.subscribe('/'..'morf_sim'..simulationID..'/graph','std_msgs/Float32MultiArray','graph_cb')
@@ -373,9 +356,10 @@ if (sim_call_type==sim.childscriptcall_initialization) then
         jointVelocitiesPub=simROS.advertise('/'..'morf_sim'..simulationID..'/joint_velocities','std_msgs/Float32MultiArray')
         imuEulerPub=simROS.advertise('/morf_sim'..simulationID..'/euler','geometry_msgs/Vector3')
         testParametersPub=simROS.advertise('/'..'morf_sim'..simulationID..'/testParameters','std_msgs/Float32MultiArray')
+        simROS.publish(testParametersPub,{data=testParameters})
     end
 
-    simROS.publish(testParametersPub,{data=testParameters})
+    
 
     -- WAIT FOR ROS TO START FULLY TO LAUNCH
     printToConsole('[ INFO] Initialized simulation')

@@ -1,10 +1,10 @@
 {
-    "FitnessValue": -0.06300103664398194,
-    "Fitness_Stab": 0.2249596118927002,
-    "Fitness_Coll": 0.17560975253582,
+    "FitnessValue": 0.4266633987426758,
+    "Fitness_Stab": 0.01410670019686222,
+    "Fitness_Coll": 0.0,
     "Fitness_Powr": 0.0,
-    "Fitness_Dist": 0.5416256189346314,
-    "Fitness_Slip": 0.20405727624893189,
-    "Distance": 0.5416256189346314,
+    "Fitness_Dist": 0.580984890460968,
+    "Fitness_Slip": 0.14021480083465577,
+    "Distance": 0.580984890460968,
     "Energy": 0.0
 }

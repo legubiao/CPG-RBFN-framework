@@ -1,0 +1,4 @@
+machine_learning/__pycache__/
+data/jobs/*
+interfaces/morf/sim/build_dir/*
+interfaces/morf/sim/build_dir/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make
