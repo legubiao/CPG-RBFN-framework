@@ -51,7 +51,7 @@ class WORKERHANLDE(object):
             for worker in range(self.workers):
                 if not working:
                     break
-                time.sleep(0.1)
+                time.sleep(0.5)
                 poll = self.worker_pool[worker].poll()
                 if poll is not None:
                     workerJobList[worker] = rollout

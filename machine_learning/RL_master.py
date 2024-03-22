@@ -35,7 +35,7 @@ def main(argv):
     init_var_boost  = 2      # This num is multiplied with the var in iteration 1
     iteration       = 0      # Number of iterations
     sim_length      = 6      # Length of one roll out in s.
-    workers         = 4      # Workers available
+    workers         = 1      # Workers available
     h               = 10     # Exploration constant
     decay           = 0.995  # Exploration decay constant
     best_max_fitness= -1000  # Maximum fitness for the run

@@ -1,6 +1,7 @@
 -- Init
 math.randomseed(os.time())
 math.random(); math.random(); math.random()
+sim.setNamedStringParam('ROSInterface.nodeName', "vrep_ros_interface"..os.time())
 
 current_dir = string.gsub(debug.getinfo(1).source, "^@(.+/)[^/]+$", "%1")
 local utils = dofile(current_dir .. "utils.lua")
