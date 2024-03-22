@@ -15,13 +15,13 @@ _Drawing inspiration from animal locomotion, we propose a simple yet versatile m
 
 ## System Requirements
 This code has been tested with the following hardware and software:
-- Intel® Core™ i9-9900K CPU @ 3.60GHz × 16
-- GeForce RTX 2080
-- Ubuntu 18.04.4 LTS
-- coppeliaSim V4.1.0
+- Intel® Core™ i7-11800H CPU @ 2.3GHz × 16
+- GeForce RTX 3070 Laptop
+- Ubuntu 20.04 LTS
+- coppeliaSim V4.6.0.rev18(Ubuntu20.04)
 - Vortex physics engine<sup>1</sup>
-- Python 3.7.7
-- ROS melodic
+- Python 3.8.10
+- ROS noetic
 
 <sup>1</sup> _**The Vortex physics engine** requires a license (which is free for researchers). Alternatively, you can use the Newton physics engine, but for that, we cannot guarantee successful behaviors. Especially, the wall and pipe climbing behaviors does not work well with the Newton physics engine. We hypothesize that this is because the behavior was learned with the Vortex physics engine and because the behavior requires the higher complexity of that engine. To test the remaining behaviors an modified version of the advanced environment called_ `Advanced_newton_env.ttt` _has been made._
 
@@ -43,17 +43,17 @@ Contains additional utilities needed by the controller implementation and simula
 _Install time will take 15-30 minutes._
 
 First, we need to set up the simulation ([coppeliaSim](https://www.coppeliarobotics.com/)):
-1. Download coppeliaSim EDU [from the downloads page](https://www.coppeliarobotics.com/previousVersions) _(tested on V4.1.0 / Ubuntu 18.04)_.
+1. Download coppeliaSim EDU [from the downloads page](https://www.coppeliarobotics.com/) _(tested on V4.6.0 / Ubuntu 20.04)_.
 2. Clone this repository to your local machine _(optional: set `$FRAMEWORK_PATH` to the path for the directory containing the cloned repository)_.
 ```bash
-git clone https://github.com/MathiasThor/CPG-RBFN-framework.git
+git clone https://github.com/legubiao/CPG-RBFN-framework.git
 ```
 3. Extract the downloaded .zip file into a directory as many times as you need "simulation workers" _(i.e., the number of simulations running in parallel. We used four workers in all our experiments)_.
 4. Rename the extracted coppeliaSim directories as: `VREP1`, `VREP2`, `VREP3`, `VREP4`, etc. _(optional: set `$VREP_WORKER_PATH` to the path for the directory containing the workers)_.
 5. In `remoteApiConnections.txt` in each of the `VREP#` directories, change `portIndex1_port` so that `VREP1` has `19997`, `VREP2` has `19996`, `VREP3` has `19995`, `VREP4` has `19994`, etc.
-6. Copy `libv_repExtRosInterface.so` into each of the worker directories from the utils directory.
+6. Copy `libsimROS.so` into each of the worker directories from the utils directory.
 ```bash
-cp $FRAMEWORK_PATH/CPG-RBFN-framework/utils/libv_repExtRosInterface.so $VREP_WORKER_PATH/VREP1/
+cp $FRAMEWORK_PATH/CPG-RBFN-framework/utils/libsimROS.so $VREP_WORKER_PATH/VREP1/
 ```
 7. Install the required python libraries _(matplotlib, jupyter, drawnow, and numpy)_.
 ```bash
