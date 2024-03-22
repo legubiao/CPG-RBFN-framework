@@ -1,8 +1,10 @@
 -- Init
 math.randomseed(os.time())
 math.random(); math.random(); math.random()
+
 current_dir = string.gsub(debug.getinfo(1).source, "^@(.+/)[^/]+$", "%1")
 local utils = dofile(current_dir .. "utils.lua")
+simROS = require('simROS')
 
 function ballTracker( )
     posMorf = sim.getObjectPosition(frontMorf, -1)
@@ -17,7 +19,7 @@ function ballTracker( )
         -- nxtBall change color to red:
         result=sim.setShapeColor(ball, nil, 0, {1.00, 0.00, 0.00})
 
-        ball = sim.getObjectHandle("ball"..nxtBall)
+        ball = sim.getObject("/ball"..nxtBall)
         nxtBall = nxtBall + 1
 
         -- nxtBall change color to green:
@@ -170,7 +172,8 @@ end
 --[[
 Initialization: Called once at the start of a simulation
 --]]
-if (sim_call_type==sim.childscriptcall_initialization) then
+function sysCall_init()
+--if (sim_call_type==sim.childscriptcall_initialization) then
 
     simulationID=sim.getIntegerSignal("simulationID")
     behaviour=sim.getStringSignal("behaviour")
@@ -233,9 +236,9 @@ if (sim_call_type==sim.childscriptcall_initialization) then
 
     gap_control = false
     if gap_control == true then
-        floor_before_gap    = sim.getObjectHandle("floor")
-        floor_gap           = sim.getObjectHandle("floor_gap")
-        floor_after_gap     = sim.getObjectHandle("floor_after")
+        floor_before_gap    = sim.getObject("/floor")
+        floor_gap           = sim.getObject("/floor_gap")
+        floor_after_gap     = sim.getObject("/floor_after")
 
         gap_depth = math.random(40, 100) * 0.001
         print("Gap size: ".. gap_depth)
@@ -250,71 +253,71 @@ if (sim_call_type==sim.childscriptcall_initialization) then
 
     -- TILT
     if(behaviour == "tilt") then
-        tilt_plate = sim.getObjectHandle("tilt_plate")
+        tilt_plate = sim.getObject("/tilt_plate")
     end
 
     -- Direction
     if(behaviour == "direction") then
-        ball = sim.getObjectHandle("ball")
+        ball = sim.getObject("/ball")
     end
 
     if(behaviour == "multiple") then
-        ball = sim.getObjectHandle("ball")
+        ball = sim.getObject("/ball")
     end
 
     -- Create all handles
     robotHandle=sim.getObjectAssociatedWithScript(sim.handle_self)
 
-    TC_motor0=sim.getObjectHandle("TC0")    -- Handle of the TC motor
-    TC_motor1=sim.getObjectHandle("TC1")    -- Handle of the TC motor
-    TC_motor2=sim.getObjectHandle("TC2")    -- Handle of the TC motor
-    TC_motor3=sim.getObjectHandle("TC3")    -- Handle of the TC motor
-    TC_motor4=sim.getObjectHandle("TC4")    -- Handle of the TC motor
-    TC_motor5=sim.getObjectHandle("TC5")    -- Handle of the TC motor
+    TC_motor0=sim.getObject("/RL_MORF/morfHexapod/leg0/TC0")    -- Handle of the TC motor
+    TC_motor1=sim.getObject("/RL_MORF/morfHexapod/leg1/TC1")    -- Handle of the TC motor
+    TC_motor2=sim.getObject("/RL_MORF/morfHexapod/leg2/TC2")    -- Handle of the TC motor
+    TC_motor3=sim.getObject("/RL_MORF/morfHexapod/leg3/TC3")    -- Handle of the TC motor
+    TC_motor4=sim.getObject("/RL_MORF/morfHexapod/leg4/TC4")    -- Handle of the TC motor
+    TC_motor5=sim.getObject("/RL_MORF/morfHexapod/leg5/TC5")    -- Handle of the TC motor
 
-    CF_motor0=sim.getObjectHandle("CF0")    -- Handle of the CF motor
-    CF_motor1=sim.getObjectHandle("CF1")    -- Handle of the CF motor
-    CF_motor2=sim.getObjectHandle("CF2")    -- Handle of the CF motor
-    CF_motor3=sim.getObjectHandle("CF3")    -- Handle of the CF motor
-    CF_motor4=sim.getObjectHandle("CF4")    -- Handle of the CF motor
-    CF_motor5=sim.getObjectHandle("CF5")    -- Handle of the CF motor
+    CF_motor0=sim.getObject("/RL_MORF/morfHexapod/leg0/CF0")    -- Handle of the CF motor
+    CF_motor1=sim.getObject("/RL_MORF/morfHexapod/leg1/CF1")    -- Handle of the CF motor
+    CF_motor2=sim.getObject("/RL_MORF/morfHexapod/leg2/CF2")    -- Handle of the CF motor
+    CF_motor3=sim.getObject("/RL_MORF/morfHexapod/leg3/CF3")    -- Handle of the CF motor
+    CF_motor4=sim.getObject("/RL_MORF/morfHexapod/leg4/CF4")    -- Handle of the CF motor
+    CF_motor5=sim.getObject("/RL_MORF/morfHexapod/leg5/CF5")    -- Handle of the CF motor
 
-    FT_motor0=sim.getObjectHandle("FT0")    -- Handle of the FT motor
-    FT_motor1=sim.getObjectHandle("FT1")    -- Handle of the FT motor
-    FT_motor2=sim.getObjectHandle("FT2")    -- Handle of the FT motor
-    FT_motor3=sim.getObjectHandle("FT3")    -- Handle of the FT motor
-    FT_motor4=sim.getObjectHandle("FT4")    -- Handle of the FT motor
-    FT_motor5=sim.getObjectHandle("FT5")    -- Handle of the FT motor
+    FT_motor0=sim.getObject("/RL_MORF/morfHexapod/leg0/FT0")    -- Handle of the FT motor
+    FT_motor1=sim.getObject("/RL_MORF/morfHexapod/leg1/FT1")    -- Handle of the FT motor
+    FT_motor2=sim.getObject("/RL_MORF/morfHexapod/leg2/FT2")    -- Handle of the FT motor
+    FT_motor3=sim.getObject("/RL_MORF/morfHexapod/leg3/FT3")    -- Handle of the FT motor
+    FT_motor4=sim.getObject("/RL_MORF/morfHexapod/leg4/FT4")    -- Handle of the FT motor
+    FT_motor5=sim.getObject("/RL_MORF/morfHexapod/leg5/FT5")    -- Handle of the FT motor
 
-    FS0=sim.getObjectHandle("3D_force0")    -- Handle of the FT motor
-    FS1=sim.getObjectHandle("3D_force1")    -- Handle of the FT motor
-    FS2=sim.getObjectHandle("3D_force2")    -- Handle of the FT motor
-    FS3=sim.getObjectHandle("3D_force3")    -- Handle of the FT motor
-    FS4=sim.getObjectHandle("3D_force4")    -- Handle of the FT motor
-    FS5=sim.getObjectHandle("3D_force5")    -- Handle of the FT motor
+    FS0=sim.getObject("/RL_MORF/morfHexapod/leg0/3D_force0")    -- Handle of the FT motor
+    FS1=sim.getObject("/RL_MORF/morfHexapod/leg1/3D_force1")    -- Handle of the FT motor
+    FS2=sim.getObject("/RL_MORF/morfHexapod/leg2/3D_force2")    -- Handle of the FT motor
+    FS3=sim.getObject("/RL_MORF/morfHexapod/leg3/3D_force3")    -- Handle of the FT motor
+    FS4=sim.getObject("/RL_MORF/morfHexapod/leg4/3D_force4")    -- Handle of the FT motor
+    FS5=sim.getObject("/RL_MORF/morfHexapod/leg5/3D_force5")    -- Handle of the FT motor
 
-    tipHandles = { sim.getObjectHandle("tip_dyn0"),
-                   sim.getObjectHandle("tip_dyn1"),
-                   sim.getObjectHandle("tip_dyn2"),
-                   sim.getObjectHandle("tip_dyn3"),
-                   sim.getObjectHandle("tip_dyn4"),
-                   sim.getObjectHandle("tip_dyn5")}
+    tipHandles = { sim.getObject("/RL_MORF/morfHexapod/leg0/tip_dyn0"),
+                   sim.getObject("/RL_MORF/morfHexapod/leg1/tip_dyn1"),
+                   sim.getObject("/RL_MORF/morfHexapod/leg2/tip_dyn2"),
+                   sim.getObject("/RL_MORF/morfHexapod/leg3/tip_dyn3"),
+                   sim.getObject("/RL_MORF/morfHexapod/leg4/tip_dyn4"),
+                   sim.getObject("/RL_MORF/morfHexapod/leg5/tip_dyn5")}
 
-    legLengthHandles = { sim.getObjectHandle("leg_length_joint0"),
-                   sim.getObjectHandle("leg_length_joint1"),
-                   sim.getObjectHandle("leg_length_joint2"),
-                   sim.getObjectHandle("leg_length_joint3"),
-                   sim.getObjectHandle("leg_length_joint4"),
-                   sim.getObjectHandle("leg_length_joint5")}
+    legLengthHandles = {    sim.getObject("/RL_MORF/morfHexapod/leg0/leg_length_joint0"),
+                            sim.getObject("/RL_MORF/morfHexapod/leg1/leg_length_joint1"),
+                            sim.getObject("/RL_MORF/morfHexapod/leg3/leg_length_joint2"),
+                            sim.getObject("/RL_MORF/morfHexapod/leg4/leg_length_joint3"),
+                            sim.getObject("/RL_MORF/morfHexapod/leg5/leg_length_joint4"),
+                            sim.getObject("/RL_MORF/morfHexapod/leg2/leg_length_joint5")}
 
-    IMU=sim.getObjectHandle("Imu")
-    IMU_tilt_rel=sim.getObjectHandle("tilt_relative")
+    IMU=sim.getObject('/RL_MORF/morfHexapod/Imu')
+    IMU_tilt_rel=sim.getObject("/tilt_relative")
 
     if behaviour == "flip" then
-        robot_rel=sim.getObjectHandle("robot_relative")
+        robot_rel=sim.getObject("/robot_relative")
     else
-        robot_rel=sim.getObjectHandle("Graph") -- Graph is used as placeholder (hotfix)
-        IMU_tilt_rel=sim.getObjectHandle("tilt_relative")
+        robot_rel=sim.getObject("/Graph") -- Graph is used as placeholder (hotfix)
+        IMU_tilt_rel=sim.getObject("/tilt_relative")
     end
 
     distHandle_leg01=sim.getDistanceHandle("leg01")
@@ -330,12 +333,12 @@ if (sim_call_type==sim.childscriptcall_initialization) then
     distHandle_leg5s=sim.getDistanceHandle("legs5")
 
     --distHandle_BF   =sim.getDistanceHandle("bodyfloor")
-    morfHexapod     =sim.getObjectHandle("morfHexapod")
-    frontMorf       =sim.getObjectHandle("blinkStick")
+    morfHexapod     =sim.getObject("/RL_MORF/morfHexapod")
+    frontMorf       =sim.getObject("/RL_MORF/morfHexapod/blinkStick")
 
-    graphHandle     =sim.getObjectHandle("Graph")
+    graphHandle     =sim.getObject("/Graph")
 
-    sensor          =sim.getObjectHandle('sensor')
+    sensor          =sim.getObject('/RL_MORF/morfHexapod/sensor')
 
     previousTime=0
 
@@ -351,14 +354,14 @@ if (sim_call_type==sim.childscriptcall_initialization) then
     pluginNotFound=true
     while moduleName do
         moduleName,moduleVersion=sim.getModuleName(index)
-        if (moduleName=='RosInterface') then
+        if (moduleName=='simROS') then
             pluginNotFound=false
         end
         index=index+1
     end
     if (pluginNotFound) then
-        sim.displayDialog('Error','The RosInterface was not found.',sim.dlgstyle_ok,false,nil,{0.8,0,0,0,0,0},{0.5,0,0,1,1,1})
-        printToConsole('[ERROR] The RosInterface was not found.')
+        sim.displayDialog('Error','The simROS was not found.',sim.dlgstyle_ok,false,nil,{0.8,0,0,0,0,0},{0.5,0,0,1,1,1})
+        printToConsole('[ERROR] The simROS was not found.')
     end
 
     -- If found then start the subscribers and publishers
@@ -373,6 +376,7 @@ if (sim_call_type==sim.childscriptcall_initialization) then
         jointVelocitiesPub=simROS.advertise('/'..'morf_sim'..simulationID..'/joint_velocities','std_msgs/Float32MultiArray')
         imuEulerPub=simROS.advertise('/morf_sim'..simulationID..'/euler','geometry_msgs/Vector3')
         testParametersPub=simROS.advertise('/'..'morf_sim'..simulationID..'/testParameters','std_msgs/Float32MultiArray')
+        print(testParametersPub)
     end
 
     simROS.publish(testParametersPub,{data=testParameters})
@@ -409,7 +413,8 @@ end
 --[[
 Actuation: This part will be executed in each simulation step
 --]]
-if (sim_call_type==sim.childscriptcall_actuation) then
+function sysCall_actuation ()
+--if (sim_call_type==sim.childscriptcall_actuation) then
     key=0
     message,auxiliaryData=simGetSimulatorMessage()
     while message~=-1 do
@@ -448,7 +453,8 @@ end
 --[[
 Sensing: This part will be executed in each simulation step
 --]]
-if (sim_call_type==sim.childscriptcall_sensing) then
+function sysCall_sensing()
+--if (sim_call_type==sim.childscriptcall_sensing) then
 
     if (terminate < 0) then
         sim.stopSimulation()
@@ -727,7 +733,8 @@ end
 --[[
 Clean up: This part will be executed one time just before a simulation ends
 --]]
-if (sim_call_type==sim.childscriptcall_cleanup) then
+function sysCall_cleanup()
+--if (sim_call_type==sim.childscriptcall_cleanup) then
     simROS.publish(jointPositionsPub,{data=position_array})
     simROS.publish(jointVelocitiesPub,{data=velocity_array})
     simROS.publish(jointTorquesPub,{data=torque_array})
@@ -749,10 +756,10 @@ if (sim_call_type==sim.childscriptcall_cleanup) then
     print("+================+")
 
     if(behaviour == "multiple") then
-        ball = sim.getObjectHandle("ball")
+        ball = sim.getObject("/ball")
         result=sim.setShapeColor(ball, nil, 0, {0.95, 0.70, 0.00})
         for i = 0, maxNxtBall do
-            ball = sim.getObjectHandle("ball"..i)
+            ball = sim.getObject("/ball"..i)
             result=sim.setShapeColor(ball, nil, 0, {0.95, 0.70, 0.00})
         end
     end

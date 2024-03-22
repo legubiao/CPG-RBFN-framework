@@ -38,7 +38,9 @@ function absmean_arr (numlist)
         return numlist
     end
     num = 0
-    table.foreach(numlist,function(i,v) num=num+math.abs(v) end)
+    for k, v in pairs(numlist) do
+        num=num+math.abs(v)
+    end
     return num / #numlist
 end
 
