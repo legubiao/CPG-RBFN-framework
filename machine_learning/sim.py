@@ -18,6 +18,7 @@ try:
     else:
         file_extension = '.so'
     libfullpath = os.path.join(os.path.dirname(__file__), 'remoteApi' + file_extension)
+    print(libfullpath)
     libsimx = ct.CDLL(libfullpath)
 except:
     print ('----------------------------------------------------')

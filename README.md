@@ -82,7 +82,7 @@ roscore
 cd $VREP_WORKER_PATH/VREP1/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/Advanced_env.ttt
+./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/Advanced_newton_env.ttt
 ```
 3. Build the locomotion controller.
 ```bash

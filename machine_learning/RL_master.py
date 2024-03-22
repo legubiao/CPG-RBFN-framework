@@ -44,7 +44,7 @@ def main(argv):
     max_iterations  = 100    # Infinity = -1
     rbfneurons      = 20     # default 20
     policy_selector = 2      # 1="only parameters", 2="only feedback", 3="both"
-    behaviour_selector = "obstacle"  # "walk", "tilt", "direction", "obstacle", "roll", "all"
+    behaviour_selector = "walk"  # "walk", "tilt", "direction", "obstacle", "roll", "all"
 
     if behaviour_selector == "walk":
         policy_selector = 1
