@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
 # Source directory: /usr/src/googletest/googlemock
-# Build directory: /home/biao/cpg_ws/CPG-RBFN-framework/interfaces/morf/sim/build_dir/gtest/googlemock
+# Build directory: /home/yanqiao/topics/src/CPG-RBFN-framework/interfaces/morf/sim/build_dir/gtest/googlemock
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

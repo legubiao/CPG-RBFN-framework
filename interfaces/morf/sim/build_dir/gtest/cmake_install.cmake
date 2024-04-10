@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/biao/cpg_ws/CPG-RBFN-framework/interfaces/morf/sim/build_dir/gtest/googlemock/cmake_install.cmake")
+  include("/home/yanqiao/topics/src/CPG-RBFN-framework/interfaces/morf/sim/build_dir/gtest/googlemock/cmake_install.cmake")
 
 endif()
 

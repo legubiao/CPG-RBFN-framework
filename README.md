@@ -46,7 +46,14 @@ First, we need to set up the simulation ([coppeliaSim](https://www.coppeliarobot
 1. Download coppeliaSim EDU [from the downloads page](https://www.coppeliarobotics.com/previousVersions) _(tested on V4.1.0 / Ubuntu 18.04)_.
 2. Clone this repository to your local machine _(optional: set `$FRAMEWORK_PATH` to the path for the directory containing the cloned repository)_.
 ```bash
-git clone https://github.com/MathiasThor/CPG-RBFN-framework.git
+cd ..
+mkdir topics
+cd topics
+mkdir src
+cd src
+git clone https://github.com/legubiao/CPG-RBFN-framework
+cd CPG-RBFN-framework
+git checkout coppeliasim4.1
 ```
 3. Extract the downloaded .zip file into a directory as many times as you need "simulation workers" _(i.e., the number of simulations running in parallel. We used four workers in all our experiments)_.
 4. Rename the extracted coppeliaSim directories as: `VREP1`, `VREP2`, `VREP3`, `VREP4`, etc. _(optional: set `$VREP_WORKER_PATH` to the path for the directory containing the workers)_.
@@ -79,7 +86,7 @@ roscore
 cd $VREP_WORKER_PATH/VREP1/
 ```
 ```bash
-./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/Advanced_env.ttt
+./coppeliaSim.sh $FRAMEWORK_PATH/CPG-RBFN-framework/simulations/Advanced_newton_env.ttt
 ```
 3. Build the locomotion controller.
 ```bash

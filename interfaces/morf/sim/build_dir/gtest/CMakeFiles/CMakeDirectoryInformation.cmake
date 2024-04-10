@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/usr/src/googletest")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/biao/cpg_ws/CPG-RBFN-framework/interfaces/morf/sim/build_dir")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/yanqiao/topics/src/CPG-RBFN-framework/interfaces/morf/sim/build_dir")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)
